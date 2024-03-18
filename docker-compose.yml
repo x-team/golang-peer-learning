@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  golang-db:
+    image: postgres:14-alpine
+    container_name: "golang-database"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=golang-database
+      - POSTGRES_USER=golang-dev
+      - POSTGRES_PASSWORD=golang-dev
+    networks:
+      - fullstack
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+  api:
+    build: .
+    container_name: "golang-backend-api"
+    environment:
+      DB_USERNAME: "golang-dev"
+      DB_PASSWORD: "golang-dev"
+      DB_NAME: "golang-database"
+      DB_HOST: "golang-db"
+      DB_PORT: "5432"
+      DB_TABLE: "golang-database"
+      DB_SSL_MODE: "disable"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - golang-db
+    networks:
+      - fullstack
+volumes:
+  database_postgres:
+networks:
+  fullstack:
+    driver: bridge

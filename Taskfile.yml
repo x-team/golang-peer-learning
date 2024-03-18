@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -o app cmd/server/main.go
+  test:
+    cmds:
+      - docker-compose up -d --build
+      - go test -v ./...
+    env:
+      DB_USERNAME: "golang-dev"
+      DB_PASSWORD: "golang-dev"
+      DB_NAME: "golang-database"
+      DB_HOST: "localhost"
+      DB_PORT: "5432"
+      DB_TABLE: "golang-database"
+      DB_SSL_MODE: "disable"
+      TOKEN_SECRET: "THE_KEY"
+  lint:
+    cmds:
+      - golangci-lint run+
+  run:
+    cmds:
+      - docker-compose up --build
+  rebuild:
+    cmds:
+      - docker-compose up -d --build --force-recreate --no-deps api
