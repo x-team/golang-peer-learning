@@ -14,5 +14,5 @@ You can run the project use the tasks specified at the Taskfile.yml.
 
 ### Rebuilding the Application
 
-After performing changes in the code you can single run the `task rebuild` command and it will rebuild the Go API docker container with the latest changes.
+After performing changes in the code you can run the `task rebuild` command and it will rebuild the Go API docker container with the latest changes.
 
