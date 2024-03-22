@@ -25,6 +25,7 @@ services:
       DB_PORT: "5432"
       DB_TABLE: "golang-database"
       DB_SSL_MODE: "disable"
+      TOKEN_SECRET: "THE_KEY"
     ports:
       - "4000:4000"
     depends_on:

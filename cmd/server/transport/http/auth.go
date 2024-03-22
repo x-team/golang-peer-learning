@@ -3,6 +3,7 @@ package http
 import (
 	"errors"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -32,7 +33,7 @@ func JWtAuth(original func(w http.ResponseWriter, r *http.Request)) func(w http.
 }
 
 func validateToken(accessToken string) bool {
-	var signingKey = []byte("THE_KEY")
+	var signingKey = []byte(os.Getenv("TOKEN_SECRET"))
 	token, err := jwt.Parse(accessToken, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("Invalid Auth Token")
