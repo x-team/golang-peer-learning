@@ -25,6 +25,7 @@ The routes are defined under the `transport/http` folder. To check the available
 Some routes require authentication where you need to send an Authorization header with a bearer token.
 
 Steps to authenticate:
-- Go to the docker-compose.yml file and change or copy the value that is set into the `TOKEN_SECRET` env variable
+- Go to the `docker-compose.yml` file and change or copy the value that is set into the `TOKEN_SECRET` env variable
 - Go to http://jwtbuilder.jamiekurtz.com/ scroll down to the bottom put the key you set into the `Key` input and click on `Create Signed JWT`
-- Copy the JWT token and use it to authenticate with the Authorization header (example `Authorization: Bearer TOKEN`
+- Copy the JWT token and use it to authenticate with the Authorization header (example `Authorization: Bearer TOKEN`)
+
