@@ -125,3 +125,10 @@ func (h *Handler) GetMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func (h *Handler) messageRoutes() {
+	h.Router.HandleFunc("/api/v1/message", JWtAuth(h.PostMessage)).Methods("POST")
+	h.Router.HandleFunc("/api/v1/message/{id}", h.GetMessage).Methods("GET")
+	h.Router.HandleFunc("/api/v1/message/{id}", JWtAuth(h.DeleteMessage)).Methods("DELETE")
+	h.Router.HandleFunc("/api/v1/message/{id}", JWtAuth(h.UpdateMessage)).Methods("PUT")
+}
