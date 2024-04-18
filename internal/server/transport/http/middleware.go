@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const RequestTimetouSeconds = 15
+const RequestTimeoutSeconds = 15
 
 func JSONMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +33,7 @@ func LogRequest(next http.Handler) http.Handler {
 
 func TimeoutMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		ctx, cancel := context.WithTimeout(r.Context(), RequestTimetouSeconds*time.Second)
+		ctx, cancel := context.WithTimeout(r.Context(), RequestTimeoutSeconds*time.Second)
 		defer cancel()
 
 		next.ServeHTTP(w, r.WithContext(ctx))

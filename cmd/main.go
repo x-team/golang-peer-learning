@@ -2,22 +2,22 @@ package main
 
 import (
 	"fmt"
-	transportHttp "golang/golang-study/cmd/server/transport/http"
+
 	"golang/golang-study/internal/conversation"
 	"golang/golang-study/internal/database"
+	transportHttp "golang/golang-study/internal/server/transport/http"
 )
 
 func Run() error {
 	fmt.Println("Starting API")
 	db, err := database.NewDatabase()
-
 	if err != nil {
 		fmt.Println("Failed to connect")
 		return err
 	}
 
-	if err := db.MigrateDB(); err != nil {
-		fmt.Errorf("ERROR RUNNING UP %w", err)
+	if err = db.MigrateDB(); err != nil {
+		fmt.Printf("ERROR MIGRATING UP THE DATABASE %v\n", err)
 		return err
 	}
 
@@ -33,7 +33,6 @@ func Run() error {
 
 func main() {
 	if err := Run(); err != nil {
-		fmt.Println("ERROR running the API")
-		fmt.Println(err)
+		fmt.Printf("ERROR running the API %v\n", err)
 	}
 }

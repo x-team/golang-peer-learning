@@ -2,11 +2,12 @@ package tests
 
 import (
 	"context"
-	"golang/golang-study/internal/conversation"
-	"golang/golang-study/internal/database"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"golang/golang-study/internal/conversation"
+	"golang/golang-study/internal/database"
 )
 
 func TestMessageDatabase(t *testing.T) {
