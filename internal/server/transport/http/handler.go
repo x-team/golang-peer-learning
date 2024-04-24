@@ -38,10 +38,7 @@ func (h *Handler) mapRoutes() {
 		w.WriteHeader(http.StatusOK)
 		return
 	}).Methods("GET")
-	h.Router.HandleFunc("/api/v1/message", JWtAuth(h.PostMessage)).Methods("POST")
-	h.Router.HandleFunc("/api/v1/message/{id}", h.GetMessage).Methods("GET")
-	h.Router.HandleFunc("/api/v1/message/{id}", JWtAuth(h.DeleteMessage)).Methods("DELETE")
-	h.Router.HandleFunc("/api/v1/message/{id}", JWtAuth(h.UpdateMessage)).Methods("PUT")
+	h.messageRoutes()
 }
 
 func (h *Handler) Serve() error {
